@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> {{ "OBSERVATION_LOCAL.TITLE" | translate }} </ion-title>
+    <ion-buttons
+      *ngIf="segmentView == 'local'"
+      slot="secondary"
+      (click)="syncObservations()"
+    >
+      <ion-button>
+        <ion-icon slot="icon-only" name="sync"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar color="primary">
+    <ion-segment (ionChange)="segmentChanged($event)">
+      <ion-segment-button checked layout="icon-start" value="list">
+        <ion-label>{{
+          "OBSERVATION_LOCAL.UPLOADED_VIEW" | translate
+        }}</ion-label>
+        <ion-icon name="cloud-done"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button layout="icon-start" value="local">
+        <ion-label>{{
+          "OBSERVATION_LOCAL.NOT_UPLOADED_VIEW" | translate
+        }}</ion-label>
+        <ion-icon name="alert"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="segmentView == 'list'">
+  <ion-refresher slot="fixed" (ionRefresh)="getObservations(true, $event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        size="6"
+        *ngFor="let ob of observations"
+        (click)="showObservation(ob)"
+      >
+        <ion-card no-margin class="ibp-observation-card">
+          <div
+            class="ibp-observation-thumbnail"
+            [ngStyle]="{ 'background-image': 'url(' + ob.thumbnail + ')' }"
+          ></div>
+          <ion-card-content> {{ ob | observationPipe }} </ion-card-content>
+        </ion-card>
+        <div class="ibp-observation-author">
+          <div
+            class="ibp-user-thumbnail"
+            [ngStyle]="{
+              'background-image': 'url(' + ob.authorprofilepic + ')'
+            }"
+          ></div>
+          <div class="ibp-observation-author-name">
+            {{ ob.authorname | lowercase | lessTextPipe }}
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll
+    threshold="200px"
+    (ionInfinite)="getObservations(false, $event)"
+  >
+    <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+
+<ion-content *ngIf="segmentView == 'local'">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let ob of localObservations">
+        <ion-card
+          no-margin
+          class="ibp-observation-card"
+          (click)="editObservation(ob.localId)"
+        >
+          <div
+            class="ibp-observation-thumbnail"
+            [ngStyle]="{
+              'background-image': 'url(' + ob.images[0].thumb + ')'
+            }"
+          ></div>
+          <ion-card-content>
+            {{ ob?.commonName || ("UNKNOWN" | translate) }}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

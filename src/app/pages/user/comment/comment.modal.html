@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="secondary">
+      <ion-button (click)="dismiss()"> {{ "CLOSE" | translate }} </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button (click)="save()"> {{ "SAVE" | translate }} </ion-button>
+    </ion-buttons>
+    <ion-title>{{ "COMMENT.TITLE" | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="stacked">{{
+      "COMMENT.WRITE_COMMENT" | translate
+    }}</ion-label>
+    <ion-textarea [(ngModel)]="comment" rows="8"></ion-textarea>
+  </ion-item>
+</ion-content>

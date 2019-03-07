@@ -1,0 +1,7 @@
+{
+  "name": "ibp2",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

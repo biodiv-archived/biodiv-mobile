@@ -1,0 +1,47 @@
+.ibp-observation-thumbnail,
+.ibp-user-thumbnail {
+  background-color: var(--ion-color-light-shade);
+  background-size: cover !important;
+  background-position: center center !important;
+}
+
+.ibp-observation-thumbnail {
+  height: 120px;
+}
+
+@media (min-width: 768px) {
+  .ibp-observation-thumbnail {
+    height: 200px;
+  }
+}
+
+.ibp-observation-card {
+  box-shadow: none;
+  border: 1px solid var(--ion-color-light-shade);
+  color: var(--ion-color-dark-tint);
+  ion-card-content {
+    height: 5em;
+    overflow: hidden;
+  }
+}
+
+.ibp-observation-author {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: var(--ion-color-dark-tint);
+  div {
+    vertical-align: top;
+    display: inline-block;
+  }
+  .ibp-user-thumbnail {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+  .ibp-observation-author-name {
+    margin-top: 5px;
+    font-size: 14px;
+    text-transform: capitalize;
+  }
+}

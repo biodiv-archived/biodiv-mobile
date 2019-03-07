@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="secondary">
+      <ion-button (click)="dismiss()"> {{ "CLOSE" | translate }} </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button (click)="save()"> {{ "SAVE" | translate }} </ion-button>
+    </ion-buttons>
+    <ion-title>{{ "OBSERVATION_INFO.SUGGEST_NAME" | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="stacked">{{
+      "OBSERVATION_INFO.LANGUAGE" | translate
+    }}</ion-label>
+    <ionic-selectable
+      headerColor="primary"
+      [(ngModel)]="suggestData.lang"
+      [items]="langs"
+      itemTextField="text"
+      [canSearch]="true"
+    >
+    </ionic-selectable>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">{{
+      "OBSERVATION_INFO.COMMON_NAME" | translate
+    }}</ion-label>
+    <ionic-selectable
+      headerColor="primary"
+      [(ngModel)]="suggestData.commonName"
+      itemTextField="value"
+      [canSearch]="true"
+      (onSearch)="search('commonNames', $event)"
+      (onChange)="
+        suggestData.scientificName = {
+          recoId: $event.value.recoId,
+          value: $event.value.acceptedName
+        }
+      "
+    >
+      <ng-template ionicSelectableItemTemplate let-lang="item">
+        <div>
+          {{ lang.value }} <br />
+          <span>{{ lang.acceptedName }}</span>
+        </div>
+      </ng-template>
+    </ionic-selectable>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">{{
+      "OBSERVATION_INFO.SCIENTIFIC_NAME" | translate
+    }}</ion-label>
+    <ionic-selectable
+      headerColor="primary"
+      [(ngModel)]="suggestData.scientificName"
+      itemValueField="value"
+      itemTextField="value"
+      [canSearch]="true"
+      (onSearch)="search('scientificNames', $event)"
+    >
+    </ionic-selectable>
+  </ion-item>
+  <!--
+  <ion-item>
+    <ion-label position="stacked">Comments</ion-label>
+    <ion-textarea [(ngModel)]="suggestData.comments" rows="6"></ion-textarea>
+  </ion-item>
+  <pre>{{ this.suggestData | json }}</pre>
+  -->
+</ion-content>

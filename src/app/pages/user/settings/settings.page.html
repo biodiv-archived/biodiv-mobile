@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> {{ "SETTINGS.TITLE" | translate }} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="settingslist">
+    <ion-item>
+      <ion-label>
+        <h2>{{ "SETTINGS.UPLOAD_OVER_WIFI.TITLE" | translate }}</h2>
+        <p>{{ "SETTINGS.UPLOAD_OVER_WIFI.DESCRIPTION" | translate }}</p>
+      </ion-label>
+      <ion-toggle
+        (ngModelChange)="saveSettings()"
+        [(ngModel)]="settings.uploadWifiOnly"
+      ></ion-toggle>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <h2>{{ "SETTINGS.UPLOAD_MANUALLY.TITLE" | translate }}</h2>
+        <p>{{ "SETTINGS.UPLOAD_MANUALLY.DESCRIPTION" | translate }}</p>
+      </ion-label>
+      <ion-toggle
+        (ngModelChange)="saveSettings()"
+        [(ngModel)]="settings.uploadManually"
+      ></ion-toggle>
+    </ion-item>
+  </ion-list>
+</ion-content>

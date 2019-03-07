@@ -1,0 +1,64 @@
+{
+  "occupation": [
+    {
+      "text": "Agriculture",
+      "value": "Agriculture"
+    },
+    {
+      "text": "Business",
+      "value": "Business"
+    },
+    {
+      "text": "Education",
+      "value": "Education"
+    },
+    {
+      "text": "Government",
+      "value": "Government"
+    },
+    {
+      "text": "Research",
+      "value": "Research"
+    },
+    {
+      "text": "Student",
+      "value": "Student"
+    },
+    {
+      "text": "Other",
+      "value": "Other"
+    }
+  ],
+  "institutions": [
+    {
+      "text": "Corporation",
+      "value": "Corporation"
+    },
+    {
+      "text": "Government",
+      "value": "Government"
+    },
+    {
+      "text": "Non Governmental Organization",
+      "value": "Non_governmental_organization"
+    },
+    {
+      "text": "Educational Institution",
+      "value": "Educational_institution"
+    },
+    {
+      "text": "Other",
+      "value": "Other"
+    }
+  ],
+  "gender": [
+    {
+      "text": "Male",
+      "value": "Male"
+    },
+    {
+      "text": "Female",
+      "value": "Female"
+    }
+  ]
+}

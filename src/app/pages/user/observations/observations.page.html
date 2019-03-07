@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="secondary" (click)="selectFilterSpeciesRef.open()">
+      <ion-button>
+        <ion-icon slot="icon-only" name="funnel"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> {{ "OBSERVATIONS.TITLE" | translate }} </ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar color="primary">
+    <ion-segment (ionChange)="segmentChanged($event)">
+      <ion-segment-button checked layout="icon-start" value="list">
+        <ion-label>{{ "OBSERVATIONS.LIST_VIEW" | translate }}</ion-label>
+        <ion-icon name="eye"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button layout="icon-start" value="map">
+        <ion-label>{{ "OBSERVATIONS.MAP_VIEW" | translate }}</ion-label>
+        <ion-icon name="map"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Species Filter -->
+<ion-select
+  hidden
+  multiple="true"
+  title="test"
+  #selectFilterSpeciesRef
+  [(ngModel)]="filteredSpeciesList"
+  (ionChange)="getObservations(true)"
+>
+  <ion-select-option *ngFor="let s of speciesList" [value]="s.id">{{
+    s.name
+  }}</ion-select-option>
+</ion-select>
+
+<ion-content *ngIf="segmentView == 'list'">
+  <ion-refresher slot="fixed" (ionRefresh)="getObservations(true, $event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Fab for Creating Observations -->
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+    class="ibp-fab-add"
+    routerLink="/user-observation-create"
+  >
+    <ion-fab-button> <ion-icon name="add"></ion-icon> </ion-fab-button>
+  </ion-fab>
+
+  <!-- <ion-button (click)="toggleInfiniteScroll()" expand="block">
+    Toggle Infinite Scroll
+  </ion-button> -->
+
+  <!-- Observations in a Grid -->
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        size="6"
+        *ngFor="let ob of observations"
+        (click)="showObservation(ob)"
+      >
+        <ion-card no-margin class="ibp-observation-card">
+          <div
+            class="ibp-observation-thumbnail"
+            [ngStyle]="{ 'background-image': 'url(' + ob.thumbnail + ')' }"
+          ></div>
+          <ion-card-content> {{ ob | observationPipe }} </ion-card-content>
+        </ion-card>
+        <div class="ibp-observation-author">
+          <div
+            class="ibp-user-thumbnail"
+            [ngStyle]="{
+              'background-image': 'url(' + ob.authorprofilepic + ')'
+            }"
+          ></div>
+          <div class="ibp-observation-author-name">
+            {{ ob.authorname | lowercase | lessTextPipe }}
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll
+    threshold="200px"
+    (ionInfinite)="getObservations(false, $event)"
+  >
+    <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+
+<ion-content *ngIf="segmentView == 'map'">
+  <div id="map_canvas"></div>
+</ion-content>

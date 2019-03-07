@@ -1,0 +1,190 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="user-observations"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ "OBSERVATION_INFO.TITLE" | translate }}</ion-title>
+    <ion-buttons slot="end" *ngIf="isEditable">
+      <ion-button (click)="editObservation()">
+        {{ "OBSERVATION_INFO.EDIT" | translate }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ibp-observation-header">
+    <div
+      class="ibp-user-thumbnail"
+      [ngStyle]="{
+        'background-image': 'url(' + ob?.authorprofilepic + ')'
+      }"
+    ></div>
+    <div class="ibp-observation-title">
+      {{ ob?.name || ob?.taxonomycanonicalform || "Unknown" }}
+      <div>{{ ob?.authorname | lowercase }}</div>
+    </div>
+  </div>
+  <ion-slides [options]="slideOptions" pager="true">
+    <ion-slide
+      class="ibp-observation-thumbnails"
+      *ngFor="let im of ob?.tProcessed; let i = index"
+    >
+      <img [src]="im.thumb" (click)="openThumb(i)" />
+    </ion-slide>
+  </ion-slides>
+
+  <div class="ibp-observation-info">
+    <div class="ibp-list-item" (click)="launchNavigator(ob)">
+      <ion-icon name="pin"></ion-icon>
+      <div class="ibp-text">{{ ob?.placename }}</div>
+    </div>
+    <div class="ibp-list-item">
+      <ion-icon name="calendar"></ion-icon>
+      <div class="ibp-text">
+        {{ "OBSERVATION_INFO.OBSERVED_ON" | translate }}:
+        {{ ob?.fromdate | date }}<br />
+        {{ "OBSERVATION_INFO.SUBMITTED_ON" | translate }}:
+        {{ ob?.createdon | date }}<br />
+        {{ "OBSERVATION_INFO.UPDATED_ON" | translate }}:
+        {{ ob?.lastrevised | date }}
+      </div>
+    </div>
+    <div class="ibp-list-item">
+      <ion-icon name="information-circle"></ion-icon>
+      <div class="ibp-text">
+        <span *ngIf="ob?.speciesgroupname"
+          >{{ "OBSERVATION_INFO.SPECIES_GROUP" | translate }}:
+          {{ ob?.speciesgroupname }}</span
+        ><br />
+        <span *ngIf="ob?.habitatname"
+          >{{ "OBSERVATION_INFO.HABITAT" | translate }}:
+          {{ ob?.habitatname }} </span
+        ><br />
+        <span [innerHtml]="ob?.notes | safe: 'html'"> </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ibp-item-list">
+    <div class="ibp-title">
+      <ion-button
+        class="ibp-title-button"
+        (click)="openModal()"
+        size="small"
+        fill="outline"
+        [disabled]="recos?.isVoted"
+      >
+        {{ "OBSERVATION_INFO.SUGGEST_NAME" | translate }}
+      </ion-button>
+      <ion-icon name="search"></ion-icon>
+      {{ "OBSERVATION_INFO.IDENTIFICATION" | translate }}
+    </div>
+    <div class="ibp-item" *ngFor="let vo of recos?.votes">
+      <div
+        class="ibp-user-thumbnail"
+        [ngStyle]="{
+          'background-image': 'url(' + (vo?.users)[0].profilePic + ')'
+        }"
+      ></div>
+      <div class="ibp-text">
+        <b>{{ (vo?.users)[vo?.users.length - 1].name }}</b>
+        <span *ngIf="vo?.noOfVotes">
+          {{ "OBSERVATION_INFO.AND" | translate }} {{ vo?.noOfVotes }}
+          {{ "OBSERVATION_INFO.MORE_USERS" | translate }}
+        </span>
+        {{ "OBSERVATION_INFO.THINKS_IT_IS" | translate }}
+        <b>{{ vo?.name }} {{ vo?.commonNames }}</b> <br />
+        <ion-button
+          *ngIf="!vo?.isLocked && !vo?.isVoted && !recos.isVoted"
+          class="ibp-vote-button"
+          size="small"
+          fill="outline"
+          (click)="addAgreeRecommendationVote(vo)"
+        >
+          {{ "OBSERVATION_INFO.AGREE" | translate }}
+        </ion-button>
+        <ion-button
+          *ngIf="!vo?.isLocked && vo?.isVoted"
+          class="ibp-vote-button"
+          size="small"
+          fill="outline"
+          (click)="removeRecommendationVote(vo)"
+        >
+          {{ "OBSERVATION_INFO.REMOVE" | translate }}
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ibp-item-list ibp-item-groups">
+    <div class="ibp-title">
+      <ion-icon name="people"></ion-icon>
+      {{ "OBSERVATION_INFO.GROUPS" | translate }}
+      <ion-button
+        class="ibp-title-button"
+        (click)="showAllGroups = true"
+        size="small"
+        fill="outline"
+        *ngIf="!showAllGroups"
+      >
+        {{ "OBSERVATION_INFO.GROUPS_SHOW_ALL" | translate }}
+      </ion-button>
+    </div>
+    <div *ngFor="let g of (groupsList | async); let i = index">
+      <div *ngIf="i < 3 || showAllGroups" class="ibp-item">
+        <div text-start class="ibp-text">{{ g.name }}</div>
+        <ion-button
+          size="small"
+          class="ibp-group-button"
+          fill="clear"
+          [color]="g.isPosted ? 'danger' : 'primary'"
+          (click)="toggleObservationGroupPosting(g)"
+        >
+          {{
+            (g.isPosted ? "OBSERVATION_INFO.UNPOST" : "OBSERVATION_INFO.POST")
+              | translate
+          }}
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ibp-item-list">
+    <div class="ibp-title">
+      <ion-icon name="chatbubbles"></ion-icon>
+      {{ "OBSERVATION_INFO.COMMENTS" | translate }}
+      <ion-button
+        class="ibp-title-button"
+        (click)="openCommentModal()"
+        size="small"
+        fill="outline"
+      >
+        {{ "OBSERVATION_INFO.ADD_COMMENT" | translate }}
+      </ion-button>
+    </div>
+    <div class="ibp-item" *ngFor="let feed of feeds">
+      <div
+        class="ibp-user-thumbnail"
+        [ngStyle]="{
+          'background-image': 'url(' + feed?.author.icon + ')'
+        }"
+      ></div>
+      <div class="ibp-text">
+        <b capitalize>{{ feed?.author.name | lowercase }}</b>
+        <i> {{ feed?.activityType }}</i> <br />
+        {{
+          feed?.activityDescription ||
+            feed?.descriptionJson.description ||
+            feed?.descriptionJson.name | safe: "text"
+        }}
+        <div class="ibp-timestamp">
+          {{ feed?.dateCreated | date: "medium" }}
+        </div>
+      </div>
+    </div>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadFeed($event)">
+      <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+</ion-content>

@@ -1,0 +1,34 @@
+.ibp-sidebar-container {
+  padding-top: 0;
+  height: 100%;
+  .banner {
+    height: 150px;
+    background: url("../assets/sidebar.jpg") no-repeat center center;
+    background-size: cover;
+    position: relative;
+    .content {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      line-height: 1.4em;
+      color: #fff;
+      img {
+        width: 50px;
+        display: block;
+        margin-bottom: 12px;
+        padding: 7px;
+        background: #fff;
+        border-radius: 50%;
+      }
+    }
+  }
+  .bottom-link {
+    left: 0;
+    right: 0;
+    margin: 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+  }
+}

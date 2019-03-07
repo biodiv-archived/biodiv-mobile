@@ -1,0 +1,30 @@
+.ibp-container {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  .ibp-header {
+    flex: 1 1 auto;
+    background: #EDDFBD url("src/assets/ibp.logo.svg") no-repeat center center;
+    background-size: contain;
+  }
+  .ibp-content {
+    box-sizing: border-box;
+    flex: 0 1 auto;
+    padding-top: var(--ibp-spacing);
+    .ibp-buttons {
+      padding: var(--ibp-spacing);
+      padding-top: 0;
+      span {
+        padding: 16px 0;
+        display: block;
+        font-size: 0.7em;
+        color: var(--ion-color-dark-tint);
+        text-align: center;
+        a {
+          font-weight: bold;
+          color: var(--ion-color-dark);
+        }
+      }
+    }
+  }
+}

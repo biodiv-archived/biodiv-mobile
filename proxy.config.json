@@ -1,0 +1,17 @@
+[
+  {
+    "context": [
+      "/biodiv",
+      "/language",
+      "/recommendation",
+      "/observation",
+      "/biodiv-api",
+      "/userGroup",
+      "/api"
+    ],
+    "target": "https://pamba.strandls.com",
+    "changeOrigin": true,
+    "secure": false,
+    "logLevel": "debug"
+  }
+]

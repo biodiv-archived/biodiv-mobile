@@ -1,0 +1,17 @@
+<div class="ibp-toast-wrapper">
+  <ion-spinner></ion-spinner>
+  <div class="ibp-toast-text" [ngSwitch]="status">
+    <span *ngSwitchCase="'uploading'">
+      {{
+        "TOAST.STATUS_IMAGE"
+          | translate
+            : {
+                uploadedImages: uploadedImages,
+                totalImages: totalImages,
+                persentage: persentage
+              }
+      }}
+    </span>
+    <span *ngSwitchCase="'finishing'"> {{ "TOAST.FINISHING_UP" }} </span>
+  </div>
+</div>

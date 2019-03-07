@@ -1,0 +1,137 @@
+{
+  "SAVE": "Save",
+  "CANCEL": "Cancel",
+  "PLEASE_SELECT": "Please Select...",
+  "EMPTY_LOCATION_MESSAGE": "Type your location in above search bar and hit ➡️ keyboard to search",
+  "UNKNOWN": "Unknown",
+  "SESSION_EXPIRED": "Session expired",
+  "LOGIN": {
+    "USERNAME": "Email",
+    "PASSWORD": "Password",
+    "LOGIN": "Sign In",
+    "GOOGLE": "Google",
+    "SIGNUP": "Sign Up",
+    "OR_LOGIN_WITH": "or Login with",
+    "SIGNUP_TEXT": "Don't have an account",
+    "RESET_PASSWORD": "Forgot Password"
+  },
+  "SIGNUP": {
+    "TITLE": "Sign Up",
+    "REGISTERED_SUCCESS_HEADER": "Registered Successfully",
+    "REGISTERED_SUCCESS_MESSAGE": "Please verify your email before sign in",
+    "OKAY": "Okay",
+    "FORM": {
+      "SEARCH": "Search Location",
+      "NAME": "Name",
+      "EMAIL": "Email",
+      "PASSWORD": "Password",
+      "REPEAT_PASSWORD": "Repeat Password",
+      "INSTITUTION_TYPE": "Institution Type",
+      "OCCUPATION_TYPE": "Occupation Type",
+      "GENDER": "Gender",
+      "LOCATION": "Location",
+      "SUBMIT": "Register"
+    }
+  },
+  "RESET": {
+    "TITLE": "Password Reset",
+    "RESET_PASSWORD": "Get reset link",
+    "RESET_SUCCESS_HEADER": "Email sent!",
+    "RESET_SUCCESS_MESSAGE": "Check your mail, We have sent instructions on how to reset your password",
+    "EMAIL": "Email"
+  },
+  "LOGOUT": {
+    "LOGGING_OUT": "Logging Out..."
+  },
+  "OBSERVATIONS": {
+    "TITLE": "Observations",
+    "SPECIES": "Species",
+    "FILTER_BY_SPECIES": "Select species to filter Observations",
+    "LIST_VIEW": "List",
+    "MAP_VIEW": "Map"
+  },
+  "COMMENT": {
+    "TITLE": "Add Comment",
+    "WRITE_COMMENT": "Write your comment below"
+  },
+  "OBSERVATION_INFO": {
+    "TITLE": "Observation",
+    "EDIT": "Edit",
+    "OBSERVED_ON": "Observed",
+    "SUBMITTED_ON": "Submitted",
+    "UPDATED_ON": "Updated",
+    "COMMENTS": "Comments",
+    "SUGGEST_NAME": "Suggest Name",
+    "GROUPS": "Group(s)",
+    "GROUPS_SHOW_ALL": "Show All",
+    "GROUP_POSTING_FAILED": "Error occured while positing to group",
+    "POST": "Post",
+    "UNPOST": "Unpost",
+    "SPECIES_GROUP": "Species",
+    "HABITAT": "Habitat",
+    "IDENTIFICATION": "Identification(s)",
+    "THINKS_IT_IS": "thinks it is",
+    "AND": "and",
+    "MORE_USERS": "more",
+    "AGREE": "Agree",
+    "REMOVE": "Remove",
+    "ADD_COMMENT": "Add Comment",
+    "MESSAGES": {
+      "INFO_SUGGESTION_ADDED": "✅ Recommendation added/updated",
+      "ERR_UNABLE_TO_ADD_SUGGESTION": "❌ Unable to add/update Recommendation",
+      "INFO_COMMENT_ADDED": "✅ Comment added",
+      "ERR_UNABLE_TO_ADD_COMMENT": "❌ Unable to add Comment"
+    },
+    "LANGUAGE": "Language",
+    "COMMON_NAME": "Common Name",
+    "SCIENTIFIC_NAME": "Scientific Name"
+  },
+  "OBSERVATION_CREATE": {
+    "TITLE": "Observation",
+    "SAVED_NOT_UPLOADED": "Observation saved but not uploaded.",
+    "YOU_ARE_OFFLINE": "Whoops, Seems that you are still offline or we are not able to detact your location",
+    "FORM": {
+      "CATEGORY": "Category",
+      "DATE_SIGHTED": "Date Sighted",
+      "LOCATION": "Location",
+      "IDENTIFICATION": "Identification",
+      "COMMON_NAME": "Common Name",
+      "SCIENTIFIC_NAME": "Scientific Name",
+      "NOTES": "Notes",
+      "USER_GROUPS": "User Groups",
+      "SUBMIT": "Save Observation"
+    }
+  },
+  "OBSERVATION_LOCAL": {
+    "TITLE": "Your Observations",
+    "UPLOADED_VIEW": "Uploaded",
+    "NOT_UPLOADED_VIEW": "Not Uploaded"
+  },
+  "SETTINGS": {
+    "TITLE": "Settings",
+    "MESSAGE_SAVED": "✅ Settings saved",
+    "UPLOAD_OVER_WIFI": {
+      "TITLE": "Upload Over Wi-Fi",
+      "DESCRIPTION": "Use only Wi-Fi to upload observations in queue"
+    },
+    "UPLOAD_MANUALLY": {
+      "TITLE": "Upload Manually",
+      "DESCRIPTION": "Prevents automated uploading of observations from the queue"
+    }
+  },
+  "GROUPS": {
+    "TITLE": "Groups",
+    "JOIN": "Join",
+    "JOINED": "Joined",
+    "JOIN_ERROR": "Unable to Join Group"
+  },
+  "ABOUT": {
+    "TITLE": "open source licenses",
+    "APPVERSION": "Version"
+  },
+  "TOAST": {
+    "STATUS_IMAGE": "Image {uploadedImages} of {totalImages} - {persentage}%",
+    "FINISHING_UP": "Finishing up...",
+    "UPLOAD_FAILED": "Failed to upload observation"
+  }
+}

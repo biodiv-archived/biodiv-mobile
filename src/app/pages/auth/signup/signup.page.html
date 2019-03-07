@@ -1,0 +1,144 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ "SIGNUP.TITLE" | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" padding-top>
+    <ion-item>
+      <ion-label position="stacked">
+        {{ "SIGNUP.FORM.NAME" | translate }}
+      </ion-label>
+      <ion-input
+        type="text"
+        formControlName="name"
+        ngDefaultControl
+        required
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">
+        {{ "SIGNUP.FORM.EMAIL" | translate }}
+      </ion-label>
+      <ion-input
+        type="email"
+        formControlName="email"
+        ngDefaultControl
+        required
+      ></ion-input>
+    </ion-item>
+    <ion-item formGroupName="passwords">
+      <ion-label position="stacked">
+        {{ "SIGNUP.FORM.PASSWORD" | translate }}
+      </ion-label>
+      <ion-input
+        type="password"
+        formControlName="password"
+        ngDefaultControl
+        required
+      ></ion-input>
+    </ion-item>
+    <ion-item formGroupName="passwords">
+      <ion-label position="stacked">
+        {{ "SIGNUP.FORM.REPEAT_PASSWORD" | translate }}
+      </ion-label>
+      <ion-input
+        type="password"
+        formControlName="password2"
+        ngDefaultControl
+        required
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">
+        {{ "SIGNUP.FORM.INSTITUTION_TYPE" | translate }}
+      </ion-label>
+      <ionic-selectable
+        placeholder="{{ 'SIGNUP.FORM.SEARCH' | translate }}"
+        itemValueField="value"
+        itemTextField="text"
+        formControlName="institutionType"
+        ngDefaultControl
+        [items]="signupOpts.institutions"
+      >
+      </ionic-selectable>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">
+        {{ "SIGNUP.FORM.OCCUPATION_TYPE" | translate }}
+      </ion-label>
+      <ionic-selectable
+        placeholder="{{ 'PLEASE_SELECT' | translate }}"
+        headerColor="primary"
+        itemValueField="value"
+        itemTextField="text"
+        formControlName="occupationType"
+        ngDefaultControl
+        [items]="signupOpts.occupation"
+      >
+      </ionic-selectable>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">
+        {{ "SIGNUP.FORM.GENDER" | translate }}
+      </ion-label>
+      <ionic-selectable
+        placeholder="{{ 'PLEASE_SELECT' | translate }}"
+        headerColor="primary"
+        itemValueField="value"
+        itemTextField="text"
+        formControlName="gender"
+        ngDefaultControl
+        [items]="signupOpts.gender"
+      >
+      </ionic-selectable>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">
+        {{ "SIGNUP.FORM.LOCATION" | translate }}
+      </ion-label>
+      <ionic-selectable
+        placeholder="{{ 'SIGNUP.FORM.SEARCH' | translate }}"
+        formControlName="location"
+        ngDefaultControl
+        headerColor="primary"
+        [canSearch]="true"
+        itemValueField="value"
+        itemTextField="text"
+        [items]="items"
+        (onSearch)="searchChanged.next($event)"
+        (onChange)="locationChanged($event)"
+      >
+        <ng-template ionicSelectableSearchFailTemplate>
+          <div text-center padding>
+            {{ "EMPTY_LOCATION_MESSAGE" | translate }}
+          </div>
+        </ng-template>
+      </ionic-selectable>
+    </ion-item>
+    <div id="map_canvas"></div>
+    <div padding>
+      <ngx-recaptcha2
+        #captchaElem
+        [siteKey]="recaptchaKey"
+        [useGlobalDomain]="false"
+        formControlName="captcha"
+        ngDefaultControl
+      >
+      </ngx-recaptcha2>
+      <ion-button
+        type="submit"
+        color="primary"
+        [disabled]="!signupForm.valid"
+        expand="block"
+        margin-top
+      >
+        {{ "SIGNUP.FORM.SUBMIT" | translate }}
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

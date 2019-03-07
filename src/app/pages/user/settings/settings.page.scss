@@ -1,0 +1,14 @@
+ion-list {
+  padding-bottom: 0;
+  ion-label {
+    margin: 0;
+    p {
+      white-space: normal;
+      margin-bottom: calc(var(--ibp-spacing) / 1.5);
+    }
+  }
+}
+
+.settingslist {
+  margin-top: var(--ibp-spacing);
+}

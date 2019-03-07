@@ -1,0 +1,35 @@
+.ibp-observation-create {
+  padding: calc(var(--ibp-spacing) / 2);
+  padding-bottom: 0;
+}
+.ibp-thumb-wrapper {
+  display: inline-block;
+  ion-thumbnail {
+    --border-radius: 4px;
+    --size: calc(100vmin / 3 - (var(--ibp-spacing) * 1.4));
+    margin: calc(var(--ibp-spacing) / 2);
+    position: relative;
+    overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    ion-thumbnail {
+      --size: calc(100vmin / 5 - (var(--ibp-spacing) * 1.2));
+      margin: calc(var(--ibp-spacing) / 2);
+    }
+  }
+  .ibp-delete {
+    width: 100%;
+    border: 0;
+    outline: none;
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--ion-color-medium-contrast);
+    padding: calc(var(--ibp-spacing) / 3);
+    font-size: 1em;
+    position: absolute;
+    bottom: 0;
+  }
+}
+#map_canvas {
+  height: 250px;
+  background: #E5E2DA;
+}

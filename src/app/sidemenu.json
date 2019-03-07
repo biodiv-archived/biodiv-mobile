@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Observations",
+    "url": "/user-observations",
+    "icon": "eye"
+  },
+  {
+    "title": "New Observation",
+    "url": "/user-observation-create",
+    "icon": "add-circle"
+  },
+  {
+    "title": "Your Observations",
+    "url": "/user-observations-local",
+    "icon": "folder"
+  },
+  {
+    "title": "Groups",
+    "url": "/user-groups",
+    "icon": "people"
+  },
+  {
+    "title": "Settings",
+    "url": "/user-settings",
+    "icon": "settings"
+  },
+  {
+    "title": "Licenses",
+    "url": "/app-about",
+    "icon": "paper"
+  },
+  {
+    "title": "Logout",
+    "url": "/logout",
+    "icon": "power",
+    "class": "bottom-link"
+  }
+]

@@ -1,0 +1,186 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> {{ "OBSERVATION_CREATE.TITLE" | translate }} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ibp-observation-create">
+    <div
+      class="ibp-thumb-wrapper"
+      *ngFor="let img of observtionImages; index as i"
+    >
+      <ion-thumbnail>
+        <button class="ibp-delete" (click)="removeObservtionImages(i)">
+          <ion-icon name="close"></ion-icon>
+        </button>
+        <img [src]="img.thumb" (load)="readExifData($event, img.path)" />
+      </ion-thumbnail>
+    </div>
+    <div class="ibp-thumb-wrapper" (click)="addObservtionImages(true)">
+      <ion-thumbnail>
+        <img src="/assets/add-image-camera.svg" />
+      </ion-thumbnail>
+    </div>
+    <div class="ibp-thumb-wrapper" (click)="addObservtionImages()">
+      <ion-thumbnail> <img src="/assets/add-image.svg" /> </ion-thumbnail>
+    </div>
+  </div>
+
+  <form
+    [formGroup]="observationCreateForm"
+    (ngSubmit)="onObservationCreateFormSubmit()"
+  >
+    <ion-item>
+      <ion-label position="stacked">
+        {{ "OBSERVATION_CREATE.FORM.CATEGORY" | translate }}
+      </ion-label>
+      <ionic-selectable
+        placeholder="{{ 'PLEASE_SELECT' | translate }}"
+        headerColor="primary"
+        itemValueField="id"
+        itemTextField="name"
+        ngDefaultControl
+        formControlName="speciesType"
+        [items]="speciesItems | async"
+      >
+      </ionic-selectable>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">
+        {{ "OBSERVATION_CREATE.FORM.DATE_SIGHTED" | translate }}
+      </ion-label>
+      <ion-datetime
+        placeholder="{{ 'PLEASE_SELECT' | translate }}"
+        [max]="basicUtilsService.getToday()"
+        display-format="DD MMMM YYYY"
+        picker-format="DD MMMM YYYY"
+        ngDefaultControl
+        formControlName="fromDate"
+      ></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">
+        {{ "OBSERVATION_CREATE.FORM.LOCATION" | translate }}
+      </ion-label>
+      <ionic-selectable
+        placeholder="{{ 'SIGNUP.FORM.SEARCH' | translate }}"
+        headerColor="primary"
+        ngDefaultControl
+        formControlName="location"
+        [canSearch]="true"
+        itemValueField="value"
+        itemTextField="text"
+        [items]="locationItems"
+        (onSearch)="searchChanged.next($event)"
+        (onChange)="locationSelected($event)"
+      >
+        <ng-template ionicSelectableSearchFailTemplate>
+          <div text-center padding>
+            {{ "EMPTY_LOCATION_MESSAGE" | translate }}
+          </div>
+        </ng-template>
+      </ionic-selectable>
+    </ion-item>
+    <div id="map_canvas"></div>
+
+    <ion-list-header padding-top>
+      <ion-label>
+        {{ "OBSERVATION_CREATE.FORM.IDENTIFICATION" | translate }}
+      </ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>Help Identify</ion-label>
+      <ion-checkbox
+        slot="start"
+        ngDefaultControl
+        formControlName="helpIdentify"
+      ></ion-checkbox>
+    </ion-item>
+
+    <ion-item *ngIf="helpIdentify">
+      <ion-label position="stacked">
+        {{ "OBSERVATION_CREATE.FORM.COMMON_NAME" | translate }}
+      </ion-label>
+      <ionic-selectable
+        headerColor="primary"
+        placeholder="{{ 'PLEASE_SELECT' | translate }}"
+        ngDefaultControl
+        formControlName="commonName"
+        itemTextField="value"
+        [canSearch]="true"
+        (onSearch)="recoSearch('commonNames', $event)"
+        (onChange)="commonNameRecoChanged($event)"
+      >
+        <ng-template ionicSelectableItemTemplate let-lang="item">
+          <div>
+            {{ lang.value }} <br />
+            <span>{{ lang.acceptedName }}</span>
+          </div>
+        </ng-template>
+      </ionic-selectable>
+    </ion-item>
+
+    <ion-item *ngIf="helpIdentify">
+      <ion-label position="stacked">
+        {{ "OBSERVATION_CREATE.FORM.SCIENTIFIC_NAME" | translate }}
+      </ion-label>
+      <ionic-selectable
+        headerColor="primary"
+        placeholder="{{ 'PLEASE_SELECT' | translate }}"
+        ngDefaultControl
+        formControlName="scientificName"
+        itemValueField="value"
+        itemTextField="value"
+        [canSearch]="true"
+        (onSearch)="recoSearch('scientificNames', $event)"
+      >
+      </ionic-selectable>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">
+        {{ "OBSERVATION_CREATE.FORM.NOTES" | translate }}
+      </ion-label>
+      <ion-textarea
+        ngDefaultControl
+        formControlName="notes"
+        rows="6"
+      ></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">
+        {{ "OBSERVATION_CREATE.FORM.USER_GROUPS" | translate }}
+      </ion-label>
+      <ionic-selectable
+        headerColor="primary"
+        placeholder="{{ 'PLEASE_SELECT' | translate }}"
+        [isMultiple]="true"
+        itemValueField="id"
+        itemTextField="name"
+        ngDefaultControl
+        formControlName="userGroups"
+        [items]="groupsList | async"
+      >
+      </ionic-selectable>
+    </ion-item>
+
+    <div padding>
+      <ion-button
+        type="submit"
+        color="primary"
+        expand="block"
+        [disabled]="!observationCreateForm.valid"
+      >
+        {{ "OBSERVATION_CREATE.FORM.SUBMIT" | translate }}
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

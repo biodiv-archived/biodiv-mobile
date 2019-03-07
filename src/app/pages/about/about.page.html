@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> {{ "ABOUT.TITLE" | translate }} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        {{ "ABOUT.APPVERSION" | translate }} {{ appVersion }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-spinner *ngIf="!licenses"></ion-spinner>
+  <pre *ngIf="licenses">Splash screen icons made by
+<a onclick="window.open('http://www.freepik.com', '_system'); return false;">Freepik</a>
+from <a onclick="window.open('http://www.flaticon.com', '_system'); return false;">www.flaticon.com</a>
+{{ licenses }}</pre>
+</ion-content>
