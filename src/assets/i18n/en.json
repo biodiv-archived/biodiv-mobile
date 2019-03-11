@@ -30,7 +30,10 @@
       "OCCUPATION_TYPE": "Occupation Type",
       "GENDER": "Gender",
       "LOCATION": "Location",
-      "SUBMIT": "Register"
+      "SUBMIT": "Register",
+      "ERRORS": {
+        "PASSWORD": "Password must be of minimum 8 characters and should match"
+      }
     }
   },
   "RESET": {

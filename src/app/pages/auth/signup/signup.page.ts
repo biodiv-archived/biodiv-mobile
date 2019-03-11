@@ -9,7 +9,7 @@ import {
   GoogleMaps,
   GoogleMapsAnimation,
   Marker,
-  MyLocation,
+  MyLocation
 } from "@ionic-native/google-maps";
 import { AlertController } from "@ionic/angular";
 import { TranslateService } from "@ngx-translate/core";
@@ -66,14 +66,14 @@ export class SignupPage implements OnInit {
       captcha: ["", Validators.required],
       passwords: this.formBuilder.group(
         {
-          password: ["", Validators.required],
-          password2: ["", Validators.required]
+          password: ["", [Validators.required, Validators.minLength(8)]],
+          password2: ["", [Validators.required, Validators.minLength(8)]]
         },
-        { validator: this.matchValidator }
+        { validator: [Validators.required, this.matchValidator] }
       ),
       institutionType: ["", Validators.required],
       occupationType: ["", Validators.required],
-      location: ["", Validators.required],
+      location: [""],
       gender: ["", Validators.required]
     });
     const rData = this.basicUtilsService.getRouterStore();
