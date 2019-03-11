@@ -72,8 +72,10 @@ export class AuthenticationService {
    * Sends signup request to servers
    * @param formData
    * @returns Can be access token or user details if user is not registered to portal
+   * @info If it's 200 that means registration is done successfully
    */
   async signup(f): Promise<any> {
+    let errorText = `Error`;
     const signupForm = {
       email: f.email,
       "g-recaptcha-response": f.captcha,
@@ -90,11 +92,17 @@ export class AuthenticationService {
       webaddress: ""
     };
     try {
-      return await this.http.post("register", signupForm).toPromise();
+      await this.http.post("register", signupForm).toPromise();
+      return { success: true };
     } catch (e) {
       console.error(e);
+      if (Array.isArray(e.error)) {
+        e.error.forEach(({ message, path }) => {
+          errorText += `\n${path}: ${message}`;
+        });
+      }
     }
-    return false;
+    return { success: false, errorText };
   }
 
   /**

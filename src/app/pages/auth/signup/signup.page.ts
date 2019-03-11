@@ -120,7 +120,7 @@ export class SignupPage implements OnInit {
       this.redirectToLogin();
     } else {
       console.error(sResponse);
-      this.basicUtilsService.showToast(sResponse.error.message);
+      this.basicUtilsService.showToast(sResponse.errorText);
     }
   }
 
