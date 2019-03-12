@@ -60,6 +60,9 @@
   "OBSERVATION_INFO": {
     "TITLE": "Observation",
     "EDIT": "Edit",
+    "DELETE": "Delete",
+    "OBSERVATION_DELETE_SUCCESS": "✅ Observation Deleted",
+    "OBSERVATION_DELETE_FAILURE": "❌ Unable to delete observatoin",
     "OBSERVED_ON": "Observed",
     "SUBMITTED_ON": "Submitted",
     "UPDATED_ON": "Updated",

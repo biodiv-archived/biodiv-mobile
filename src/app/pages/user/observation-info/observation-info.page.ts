@@ -224,4 +224,21 @@ export class ObservationInfoPage implements OnInit {
     });
     this.router.navigate(["/user-observation-create"]);
   }
+
+  async deleteObservation() {
+    const deleted = await this.observationsService.deleteObservation(
+      this.ob.id
+    );
+    this.basicUtilsService.showToast(
+      this.translateService.instant(
+        deleted
+          ? "OBSERVATION_INFO.OBSERVATION_DELETE_SUCCESS"
+          : "OBSERVATION_INFO.OBSERVATION_DELETE_FAILURE"
+      )
+    );
+    if (deleted) {
+      this.basicUtilsService.setRouterStore({ reload: true });
+      this.router.navigate(["/user-observations"]);
+    }
+  }
 }

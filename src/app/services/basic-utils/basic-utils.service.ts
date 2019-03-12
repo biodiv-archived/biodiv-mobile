@@ -49,6 +49,10 @@ export class BasicUtilsService {
     toast.present();
   }
 
+  public clearRouterStore() {
+    this.routerStore = undefined;
+  }
+
   public setRouterStore(data) {
     this.routerStore = data;
   }
@@ -154,7 +158,8 @@ export class BasicUtilsService {
     return new Promise((resolve, reject) => {
       getData(image, function() {
         let response = {};
-        const timestamp = getTag(this, "DateTimeOriginal") || getTag(this, "DateTime");
+        const timestamp =
+          getTag(this, "DateTimeOriginal") || getTag(this, "DateTime");
         const lat = getTag(this, "GPSLatitude");
         const lng = getTag(this, "GPSLongitude");
         if (timestamp) {

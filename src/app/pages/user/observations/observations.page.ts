@@ -57,6 +57,17 @@ export class ObservationsPage implements OnInit {
     this.startListioner();
   }
 
+  /**
+   * Reloads observations by checking routerStore
+   */
+  ionViewDidEnter() {
+    const rStore = this.basicUtilsService.getRouterStore() || {};
+    if (rStore.reload) {
+      this.getObservations(true);
+    }
+    this.basicUtilsService.clearRouterStore();
+  }
+
   private startListioner() {
     this.events.subscribe("ibp-uploader:end", () => {
       this.getObservations(true);

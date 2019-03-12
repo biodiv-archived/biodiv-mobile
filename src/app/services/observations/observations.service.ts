@@ -256,6 +256,23 @@ export class ObservationsService {
 
   /**
    * Removed given recommendation on a observation
+   * @param observationId
+   * @returns response from server after uploading observation
+   */
+  async deleteObservation(observationId) {
+    try {
+      const response = await this.http
+        .post(`../api/observation/${observationId}/flagDeleted`, {}, {})
+        .toPromise();
+      return response.hasOwnProperty("success") ? response["success"] : false;
+    } catch (e) {
+      console.error(e);
+    }
+    return false;
+  }
+
+  /**
+   * Removed given recommendation on a observation
    * @param args Arguements
    * @param images Array of selected Images
    * @returns response from server after uploading observation

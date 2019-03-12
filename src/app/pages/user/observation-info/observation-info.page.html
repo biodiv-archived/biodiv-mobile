@@ -5,6 +5,9 @@
     </ion-buttons>
     <ion-title>{{ "OBSERVATION_INFO.TITLE" | translate }}</ion-title>
     <ion-buttons slot="end" *ngIf="isEditable">
+      <ion-button (click)="deleteObservation()">
+        {{ "OBSERVATION_INFO.DELETE" | translate }}
+      </ion-button>
       <ion-button (click)="editObservation()">
         {{ "OBSERVATION_INFO.EDIT" | translate }}
       </ion-button>
