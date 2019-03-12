@@ -1,7 +1,11 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { PhotoViewer } from "@ionic-native/photo-viewer/ngx";
-import { IonInfiniteScroll, ModalController } from "@ionic/angular";
+import {
+  AlertController,
+  IonInfiniteScroll,
+  ModalController
+} from "@ionic/angular";
 import { TranslateService } from "@ngx-translate/core";
 import { fromEvent } from "rxjs";
 
@@ -36,7 +40,8 @@ export class ObservationInfoPage implements OnInit {
     private photoViewer: PhotoViewer,
     private observationsService: ObservationsService,
     private modalController: ModalController,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {
@@ -226,19 +231,42 @@ export class ObservationInfoPage implements OnInit {
   }
 
   async deleteObservation() {
-    const deleted = await this.observationsService.deleteObservation(
-      this.ob.id
-    );
-    this.basicUtilsService.showToast(
-      this.translateService.instant(
-        deleted
-          ? "OBSERVATION_INFO.OBSERVATION_DELETE_SUCCESS"
-          : "OBSERVATION_INFO.OBSERVATION_DELETE_FAILURE"
-      )
-    );
-    if (deleted) {
-      this.basicUtilsService.setRouterStore({ reload: true });
-      this.router.navigate(["/user-observations"]);
-    }
+    const alert = await this.alertController.create({
+      header: this.translateService.instant(
+        "OBSERVATION_INFO.ALERT_OBSERVATION_DELETE_TITLE"
+      ),
+      message: this.translateService.instant(
+        "OBSERVATION_INFO.ALERT_OBSERVATION_DELETE_TEXT"
+      ),
+      buttons: [
+        {
+          text: this.translateService.instant("CANCEL"),
+          role: "cancel",
+          cssClass: "secondary"
+        },
+        {
+          text: this.translateService.instant("OBSERVATION_INFO.DELETE"),
+          cssClass: "ibp-alert-button-danger",
+          handler: async () => {
+            const deleted = await this.observationsService.deleteObservation(
+              this.ob.id
+            );
+            this.basicUtilsService.showToast(
+              this.translateService.instant(
+                deleted
+                  ? "OBSERVATION_INFO.OBSERVATION_DELETE_SUCCESS"
+                  : "OBSERVATION_INFO.OBSERVATION_DELETE_FAILURE"
+              )
+            );
+            if (deleted) {
+              this.basicUtilsService.setRouterStore({ reload: true });
+              this.router.navigate(["/user-observations"]);
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

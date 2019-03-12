@@ -61,6 +61,8 @@
     "TITLE": "Observation",
     "EDIT": "Edit",
     "DELETE": "Delete",
+    "ALERT_OBSERVATION_DELETE_TITLE": "Delete this observation?",
+    "ALERT_OBSERVATION_DELETE_TEXT": "Observation will be deleted from indiabiodiversity portal and will no longer be visible to anyone",
     "OBSERVATION_DELETE_SUCCESS": "✅ Observation Deleted",
     "OBSERVATION_DELETE_FAILURE": "❌ Unable to delete observatoin",
     "OBSERVED_ON": "Observed",

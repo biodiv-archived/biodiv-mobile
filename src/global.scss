@@ -34,3 +34,7 @@ ion-content {
 [capitalize] {
   text-transform: capitalize;
 }
+
+.ibp-alert-button-danger {
+  color: var(--ion-color-danger) !important;
+}
