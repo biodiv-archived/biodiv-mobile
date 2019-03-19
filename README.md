@@ -18,7 +18,7 @@ git clone https://github.com/strandls/biodiv-mobile   # Clone Repository
 npm install -g ionic cordova                          # Install Ionic and Cordova Globally
 npm install                                           # Install Dependencies
 npm run decrypt-assets
-# Abobe command is required for IBP Mobile development only
+# above command is required for IBP Mobile development only
 # to decrypt config and signing assets locally
 # otherwise modify `src/environments/environment.sample.ts`
 # and create `build.json` if you want automatic signing for more see https://bit.ly/2VEABgE
@@ -30,3 +30,11 @@ ionic serve                                           # Start development enviro
 ```sh
 ionic cordova build android/ios # add --prod --release flag for building production apk
 ```
+
+## Bugs and Issues
+
+Have a bug or an issue with this template? [Open a new issue](https://github.com/strandls/biodiv-mobile/issues) here on Github.
+
+## Copyright and License
+
+Copyright 2019 Strand Strand Life Sciences Private Limited. Code released under the [Apache 2.0](https://github.com/strandls/biodiv-mobile/blob/master/LICENSE) license.
