@@ -244,7 +244,7 @@ export class ObservationsTransformService {
         response["model"]["observations"]["resources"][0]["fileName"];
       payload[`license_${ic}`] = "CC+BY";
       payload[`type_${ic}`] = "IMAGE";
-      this.events.publish("ibp-uploader:imagedone", i);
+      this.events.publish("ibp-uploader:imagedone", parseInt(`${i}`, 10) + 1);
     }
     return payload;
   }
