@@ -45,7 +45,7 @@ export class ToastStatusComponent implements OnInit {
     });
 
     this.events.subscribe("ibp-uploader:imagedone", ui => {
-      this.uploadedImages = ui;
+      this.uploadedImages = ui + 1;
       this.ref.detectChanges();
     });
 
